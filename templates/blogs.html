@@ -1,0 +1,517 @@
+{% extends "website-layout.html" %}
+{% block title %} Blog | Parcel Forwarder {% endblock %}
+{% block content %}
+
+<!-- Start Page Title Container -->
+<div class="page-custom-header">
+<div class="container">
+<div class="row">
+<div class="col-md-12 text-center">
+<h1 class="fancy-heading text-light">Blogs</h1>
+<ul class="breadcrumb light">
+<li><a href="index.html">Home</a></li>
+<li class="active">Blogs </li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- End Page Title Container -->
+<div class="content-container">
+<!-- Start Community Web Section -->
+<div class="grid-col-2 pad-top-50 pad-bot-20">
+<div class="container">
+<div class="row">
+<div id="posts-pagination" class="col-lg-8 col-md-8 col-sm-8 no-padding-side tableGridContainer portfolio filterArea">
+
+<table>
+<tbody>
+    {% for post in data.posts %}
+    <tr><td>
+    <!-- Grid 2 Column -->
+        <ul class="col-2 list-unstyled">
+        <!-- Grid Item 1 -->
+         <li class="col-md-12 category1 post-grid">
+        <div class="item">
+        <div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>
+        </div>
+        <div>
+        <h4 class="post-title"><a href="#">{{ post.title.rendered }}</a></h4>
+        <ul class="list-unstyled list-inline post-data">
+        <li><i class="fa fa-user"></i> <a href="#">Admin</a></li>
+        <li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>
+        <li><i class="fa fa-clock-o" aria-hidden="true"></i>{{ post.modified }} ago</li>
+        </ul>
+        <p class="post-excerpt">{{ post.excerpt.rendered }}</p>
+        <a class="page-link" href="#">Read more</a>
+        </div>
+        </div>
+        </li>
+        </ul> <!-- End of Grid 2 Column -->
+    </td></tr>
+
+    {% endfor %}
+
+
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2  list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/3.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2 list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/1.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/3.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2 list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2 list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/3.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2 list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/1.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/3.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2 list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/1.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2 list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/3.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2 list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/1.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/3.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2 list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/1.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+{#<tr><td>#}
+{#<!-- Grid 2 Column -->#}
+{#<ul class="col-2 list-unstyled">#}
+{#<!-- Grid Item 3 -->#}
+{#<li class="col-md-12 category3 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#<!-- Grid Item 4 -->#}
+{#<li class="col-md-12 category1 post-grid">#}
+{#<div class="item">  #}
+{#<div class="post-img"><a href="#"><img class="img-responsive" src="./images/blogs/3.jpg" alt="Post Thumb"/></a>#}
+{#</div>#}
+{#<div>#}
+{#<h4 class="post-title"><a href="#">Post Sample Title</a></h4>#}
+{#<ul class="list-unstyled list-inline post-data">#}
+{#<li><i class="fa fa-user"></i> <a href="#">Admin</a></li>#}
+{#<li><i class="fa fa-comment"></i> <a href="#">5 Comments</a></li>#}
+{#<li><i class="fa fa-clock-o" aria-hidden="true"></i> 1 minute ago</li>#}
+{#</ul>#}
+{#<p class="post-excerpt">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. </p>#}
+{#<a class="page-link" href="#">Read more</a>#}
+{#</div>#}
+{#</div>#}
+{#</li>#}
+{#</ul> <!-- End of Grid 2 Column -->#}
+{#</td></tr>#}
+</tbody>
+</table>
+<div class="pagination-container">
+<!-- Start Post Pagination -->
+<div class="my-navigation col-xs-pull-3">
+<div class="simple-pagination-first"></div>
+<div class="simple-pagination-previous"></div>
+<div class="simple-pagination-page-numbers"></div>
+<div class="simple-pagination-next"></div>
+<div class="simple-pagination-last"></div>
+<div class="clearfix"></div>
+</div>
+<!-- End Post Pagination -->
+<div class="clearfix"></div>
+</div>
+</div>
+ <script>
+(function($){
+$('#posts-pagination').postsPagination();
+})(jQuery);
+</script>
+
+
+<!-- Blog Sidebar --> 
+<div class="col-md-4 col-sm-4 right-sidebar">
+<div class="bgcolor1 searchBar">
+<div class="input-group">
+<input type="text" class="form-control" placeholder="Search Keyword" />
+<span class="input-group-btn">
+<button class="btn btn-theme" type="button"><i class="glyphicon glyphicon-search"></i></button>
+</span>
+</div>
+</div>
+<h4 class="post-title mar-top-50">Categories</h4>
+    <ul class="category-list list-unstyled">
+        {% for category in data.categories %}
+        <li><a href="#">{{ category.name }}<span>({{ category.count }})</span></a></li>
+        {% endfor %}
+
+    </ul>
+<h4 class="post-title mar-top-50">Popular Posts</h4>
+<ul class="popular-posts">
+<li>
+<a href="#"><img class="img-responsive" src="./images/blogs/1.jpg" alt="Post Thumb"/></a>
+<h5><a href="#">Lorem ipsum dolor sit amet consectetur adipiscing elit</a></h5>
+<p>09 Oct 2018</p>
+</li>
+<li>
+<a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>
+<h5><a href="#">Nulla iaculis mattis lorem, quis gravida nunc iaculis</a></h5>
+<p>10 Oct 2018</p>
+</li><li>
+<a href="#"><img class="img-responsive" src="./images/blogs/3.jpg" alt="Post Thumb"/></a>
+<h5><a href="#">Vivamus tincidunt sem eu magna varius elementum maecenas felis</a></h5>
+<p>11 Oct 2018</p>
+</li>
+</ul>
+<h4 class="post-title mar-top-50">Tags</h4>
+    {% for tag in data.tags %}
+    <span class="label label-theme">{{ tag.name }}</span>
+    {% endfor %}
+</div> 
+<!-- End of Blog Sidebar -->
+
+
+</div>
+</div>
+</div>
+<!-- End Community Web Section -->
+</div>
+
+{% endblock %}

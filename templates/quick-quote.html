@@ -1,0 +1,335 @@
+{% extends "website-layout.html" %}
+{% block title %} Quick Quote | Parcel Forwarder {% endblock %}
+{% block content %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/forms/smart-forms.css') }}" />
+{% endblock %}
+
+<!-- Start Page Title Container -->
+<div class="page-custom-header">
+<div class="container">
+<div class="row">
+<div class="col-md-12 text-center">
+<h1 class="fancy-heading text-light">Quick Quote</h1>
+<ul class="breadcrumb light">
+<li><a href="index.html">Home</a></li>
+<li class="active">Quick Quote</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- End Page Title Container -->
+<div class="content-container">
+
+<div class="tab_section">
+<div class="container">
+<div class="row">
+<div class="tab_grid">
+<!-- Tab - Default -->
+<div class="tab_head">
+<ul class="nav nav-tabs" role="tablist">
+<li class="active"><a href="#shipping-rate" role="tab" data-toggle="tab">Shipping Rate Calculator</a></li>
+<li><a href="#reviews" role="tab" data-toggle="tab">Reviews</a></li>
+<li><a href="#transit-times" role="tab" data-toggle="tab">Transit Times</a></li>
+<li><a href="#duty-tax-info" role="tab" data-toggle="tab">Duty Tax Info</a></li>
+</ul>
+</div>
+<div class="tab-content">
+<div class="tab-pane active" id="shipping-rate">
+<div class="smart-wrap col-sm-6 tab_colm">
+<div class="smart-forms smart-container wrap-1">
+
+{% if data.quotes %}
+    {% for quote in data.quotes %}
+    <ul>
+        <li><b>Courier:</b> {{ quote['carrier'] }}</li>
+        <li><b>Service Name:</b> {{ quote['service_name'] }}</li>
+        <li><b>Shipping Price Net: </b>£ {{quote['shipping_price_net']}}</li>
+        <li><b>Protection Price Net: </b>£ {{quote['protection_price_net']}}</li>
+        <li><b>Total Gross: </b>£ {{quote['total_price_gross']}}</li>
+        <li><b>Info: </b>{{quote['service_description']}}</li>
+    </ul>
+    {% endfor %}
+{% else %}
+<form method="post" action="{{ url_for('website.quick_quote') }}" id="feedback">
+<div class="form-body">
+
+<div class="frm-row">
+
+<div class="section colm colm6">
+<label for="origin" class="field-label">Origin</label>
+<label class="field prepend-icon select">
+    <select class="gui-input" name="origin" id="origin" required>
+       {% for country in data.countries %}
+        <option value="{{country['alpha-2']}}">{{country['name']}}</option>
+     {% endfor %}
+    </select>
+<span class="field-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+</label>
+</div><!-- end section -->
+
+<div class="section colm colm6">
+<label for="destination" class="field-label">Destination</label>
+<label class="field prepend-icon select">
+    <select class="gui-input" name="destination" id="destination" required>
+        {% for country in data.countries %}
+        <option value="{{country['alpha-2']}}">{{country['name']}}</option>
+     {% endfor %}
+    </select>
+<span class="field-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+</label>
+</div><!-- end section -->
+</div> <!-- end row -->
+
+<div class="frm-row">
+    <div class="section colm colm6">
+    <label for="origin" class="field-label">Sender County</label>
+        <input type="text" name="sender_county" class="gui-input" id="sender_county" placeholder="Sender County.." required>
+    </div><!-- end section -->
+
+    <div class="section colm colm6">
+    <label for="receiver_county" class="field-label">Receiver County</label>
+        <input type="text" name="receiver_county" class="gui-input" id="receiver_county" placeholder="Receiver County.." required>
+    </div><!-- end section -->
+</div>
+<div class="frm-row">
+    <div class="section colm colm6">
+    <label for="sender_town" class="field-label">Sender Town</label>
+        <input type="text" id="sender_town" name="sender_town" class="gui-input" placeholder="Sender Town.." required>
+    </div><!-- end section -->
+
+    <div class="section colm colm6">
+    <label for="receiver_town" class="field-label">Receiver Town</label>
+        <input type="text" id="receiver_town" name="receiver_town" class="gui-input" placeholder="Receiver Town.." required>
+    </div><!-- end section -->
+</div>
+
+<div class="frm-row">
+    <div class="section colm colm6">
+    <label for="sender_postcode" class="field-label">Sender Postcode</label>
+        <input type="text" id="sender_postcode" name="sender_postcode" class="gui-input" placeholder="Sender Postcode.." required>
+    </div><!-- end section -->
+
+    <div class="section colm colm6">
+    <label for="receiver_postcode" class="field-label">Receiver Postcode</label>
+        <input type="text" id="receiver_postcode" name="receiver_postcode" class="gui-input" placeholder="Receiver Postcode" required>
+    </div><!-- end section -->
+</div>
+
+<div class="frm-row">
+    <div class="section colm colm12">
+    <label for="sender_address1" class="field-label">Sender Address</label>
+        <input type="text" id="sender_address1" name="sender_address1" class="gui-input" placeholder="Sender Address.." required>
+    </div><!-- end section -->
+</div>
+
+<div class="frm-row">
+    <div class="section colm colm12">
+    <label for="receiver_address" class="field-label">Receiver Address</label>
+        <input type="text" id="receiver_address" name="receiver_address1" class="gui-input" placeholder="Receiver Address" required>
+    </div><!-- end section -->
+</div>
+
+<div class="frm-row">
+<div class="section colm colm12">
+<label for="weight" class="field-label">Weight of Package(kg)</label>
+<label class="field prepend-icon">
+<input required type="number" min="1" name="weight" id="weight" class="gui-input" placeholder="(kg)...">
+<span class="field-icon"><i class="fa fa-cubes" aria-hidden="true"></i></span>
+</label>
+</div><!-- end section -->
+</div>
+
+
+<div class="frm-row">
+<div class="section colm colm12">
+<label for="goods_value" class="field-label">Value of the consignment in GBP</label>
+<input required type="number" min="1" name="goods_value" id="goods_value" class="gui-input" placeholder="Goods value in GPB">
+</div><!-- end section -->
+</div>
+
+<div class="frm-row">
+<div class="colm12 colm"><label class="field-label">Package Size</label></div>
+<div class="section colm colm4">
+<label class="field prepend-icon">
+<input required type="number" minlength="1" name="length" id="length" class="gui-input" placeholder="Length(cm)">
+<span class="field-icon"><i class="fa fa-arrows-h" aria-hidden="true"></i></span>
+</label>
+</div><!-- end section -->
+
+<div class="section colm colm4">
+<label class="field prepend-icon">
+<input required type="number" minlength="1" name="width" id="width" class="gui-input" placeholder="Width(cm)">
+<span class="field-icon"><i class="fa fa-arrows-alt" aria-hidden="true"></i>
+</span>
+</label>
+</div><!-- end section -->
+
+<div class="section colm colm4">
+<label class="field prepend-icon">
+<input required type="number" minlength="1" name="height" id="Height" class="gui-input" placeholder="Height(cm)">
+<span class="field-icon"><i class="fa fa-arrows-v" aria-hidden="true"></i></span>
+</label>
+</div><!-- end section -->
+
+</div>
+
+															
+</div><!-- end .form-body section -->
+<div class="form-footer">
+<button type="submit" class="button btn-primary">Get Quote</button>
+</div><!-- end .form-footer section -->
+</form>
+
+</div><!-- end .smart-forms section -->
+</div>
+{% endif %}
+<div class="col-sm-6 tab_content_img tab_colm">
+<img src="{{ url_for('static', filename='images/shipping-map.png') }}" alt="Image" />
+</div>
+
+</div>
+<div class="tab-pane" id="reviews">
+<div class="smart-wrap col-sm-6 tab_colm">
+<div class="smart-forms smart-container wrap-1">
+
+
+<form method="post" action="index.html" id="feedback">
+<div class="form-body">
+
+<div>
+
+<div class="section">
+
+<span class="rating block">
+
+<span class="lbl-text">Rate Our Services</span>
+
+<input class="rating-input" id="five-stars" type="radio" name="product-rate">
+<label class="rating-star" for="five-stars"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="four-stars" type="radio" name="product-rate">
+<label class="rating-star" for="four-stars"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="three-stars" type="radio" name="product-rate" checked="">
+<label class="rating-star" for="three-stars"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="two-stars" type="radio" name="product-rate">
+<label class="rating-star" for="two-stars"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="one-star" type="radio" name="product-rate">
+<label class="rating-star" for="one-star"><i class="fa fa-star"></i></label>
+
+</span>
+
+<span class="rating block">
+
+<span class="lbl-text">Rate Support Team</span>
+
+<input class="rating-input" id="5stars" type="radio" name="support-rate">
+<label class="rating-star" for="5stars"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="4stars" type="radio" name="support-rate">
+<label class="rating-star" for="4stars"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="3stars" type="radio" name="support-rate">
+<label class="rating-star" for="3stars"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="2stars" type="radio" name="support-rate" checked="">
+<label class="rating-star" for="2stars"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="1star" type="radio" name="support-rate">
+<label class="rating-star" for="1star"><i class="fa fa-star"></i></label>
+
+</span>
+
+<span class="rating block">
+
+<span class="lbl-text">Rate Our Response</span>
+
+<input class="rating-input" id="5s" type="radio" name="response-rate">
+<label class="rating-star" for="5s"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="4s" type="radio" name="response-rate">
+<label class="rating-star" for="4s"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="3s" type="radio" name="response-rate">
+<label class="rating-star" for="3s"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="2s" type="radio" name="response-rate">
+<label class="rating-star" for="2s"><i class="fa fa-star"></i></label>
+
+<input class="rating-input" id="1s" type="radio" name="response-rate" checked="">
+<label class="rating-star" for="1s"><i class="fa fa-star"></i></label>
+
+</span>                         
+
+</div><!-- end  section -->
+</div>
+
+
+															
+</div><!-- end .form-body section -->
+<div class="form-footer">
+<button type="submit" class="button btn-primary">Send Reviews</button>
+</div><!-- end .form-footer section -->
+</form>
+
+</div><!-- end .smart-forms section -->
+</div>
+
+</div>
+<div class="tab-pane" id="transit-times">
+<div class="smart-wrap col-sm-12 tab_colm">
+<div class="smart-forms smart-container wrap-1">
+
+
+<form method="post" action="index.html" id="feedback">
+<div class="form-body">
+
+<div>
+
+<div class="section">
+<label class="field prepend-icon">
+<textarea class="gui-textarea" id="comment" name="comment" placeholder="Type Your Message Here"></textarea>
+<span class="field-icon"><i class="fa fa-comments"></i></span>
+<span class="input-hint"> <strong>Hint:</strong> Please enter between 80 - 300 characters.</span>   
+</label>
+</div><!-- end section -->  
+
+</div>
+
+															
+</div><!-- end .form-body section -->
+<div class="form-footer">
+<button type="submit" class="button btn-primary">Send Messages</button>
+</div><!-- end .form-footer section -->
+</form>
+
+</div><!-- end .smart-forms section -->
+</div>
+</div>
+<div class="tab-pane" id="duty-tax-info">
+<div class="col-sm-6 tab_colm">
+<p>Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. </p>
+<p>Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. </p>
+</div>
+<div class="col-sm-6 tab_colm">
+<p>Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. </p>
+<p>Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. Lorem ipsum is a dummy text. </p>
+</div>
+</div>
+</div>			
+</div>		
+</div>
+</div>
+</div>
+
+
+
+
+</div>
+
+
+{% endblock %}

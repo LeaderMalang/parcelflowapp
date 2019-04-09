@@ -1,0 +1,152 @@
+{% extends "admin/layout.html" %}
+{% block title %} Orders - ParcelFlow Admin Panel {% endblock %}
+{% set active_page = "orders" %}
+
+{% block content %}
+<h2>Orders</h2>
+<form class="form-inline my-2 my-lg-0" action="{{ url_for('admin.orders') }}" method="POST">
+      <input class="form-control mr-sm-2" name="q" value="{{data.q if data.q else ''}}" type="search" placeholder="Search by Order ID" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" name="search_orders" value="search_orders" type="submit">Search</button>
+</form>
+<div class="table-responsive">
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Agent ID</th>
+        <th>Status</th>
+        <th>Prospects Email</th>
+        <th>Country</th>
+        <th>Purchase link</th>
+        <th>Package Description</th>
+        <th>Received</th>
+        <th>Size</th>
+        <th>Payment Status</th>
+        <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for order in data.orders %}
+    <tr>
+        <td class="orderID">{{order.orderID}}</td>
+        <td class="agentID">{{order.agentID}}</td>
+        <td class="order_status">{{order.order_status}}</td>
+        <td class="customer_email">{{order.customer_email}}</td>
+        <td class="country_of_origin">{{order.country_of_origin}}</td>
+        <td class="purchase_link">{{order.purchase_link}}</td>
+        <td class="package_description">{{order.package_description}}</td>
+        <td class="received">{{order.received}}</td>
+        <td class="size">{{order.size}}</td>
+        <td class="is_paid">{{order.is_paid}}</td>
+        <td>
+            <button class="btn edit-details btn-sm btn-secondary" data-toggle="modal" data-target="#editOrder-{{order.orderID}}">Edit</button>
+            <a class="btn btn-sm btn-danger" href="{{url_for('admin.orders')}}?delete_order={{order.orderID}}">Delete</a>
+        </td>
+        <div class="modal fade" id="editOrder-{{order.orderID}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Order</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <form action="{{ url_for('admin.orders') }}" method="POST">
+              <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="agentID">Agent ID</label>
+                      <input type="text" name="agentID" value="{{order.agentID}}" class="form-control" required="" id="agentID">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="order_status">Order Status</label>
+                      <input type="text" name="order_status" value="{{order.order_status}}" class="form-control" required="" id="order_status">
+                    </div>
+                </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label for="customer_email">Customer Email</label>
+                  <input type="text" name="customer_email" value="{{order.customer_email}}" class="form-control" required="" id="customer_email">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="country_of_origin">Country Of Origin</label>
+                  <input type="text" name="country_of_origin" value="{{order.country_of_origin}}" class="form-control" required="" id="country_of_origin">
+                </div>
+            </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="is_paid">Is Paid? (True/False)</label>
+                  <input type="text" name="is_paid" value="{{order.is_paid}}" class="form-control" required="" id="is_paid">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="received">Order Receival</label>
+                  <input type="text" name="received" value="{{order.received}}" class="form-control" required="" id="received">
+                </div>
+            </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="purchase_link">Purchase Link</label>
+                  <input type="url" name="purchase_link" value="{{order.purchase_link}}" class="form-control" required="" id="purchase_link">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="handling_cost">Handling Cost</label>
+                    <input class="form-control" type="number" name="handling_cost" value="{{ order.handling_cost }}" required id="handling_cost">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="consolidation_cost">Consolidation Cost</label>
+                    <input class="form-control" type="number" name="consolidation_cost" value="{{ order.consolidation_cost }}" required id="consolidation_cost" >
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="storage_cost">Storage Cost</label>
+                    <input class="form-control" type="number" name="storage_cost" value="{{ order.storage_cost }}" required id="storage_cost">
+                </div>
+            </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="weight">Weight</label>
+                    <input class="form-control" type="number" name="weight" value="{{ order.weight }}" required id="weight">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="length ">Length</label>
+                    <input class="form-control" type="number" name="length" value="{{ order.length }}" required id="length ">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="width ">Width</label>
+                    <input class="form-control" type="number" name="width" value="{{ order.width }}" required id="width ">
+                </div>
+                 <div class="form-group col-md-3">
+                     <label for="height ">Height</label>
+                    <input class="form-control" type="number" name="height" value="{{ order.height }}" required id="height ">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <label for="package_description">Package Description</label>
+                <textarea id="package_description" name="package_description" class="form-control" cols="30" rows="10" required>{{order.package_description}}</textarea>
+            </div>
+      </div>
+      <div class="modal-footer">
+          <input type="hidden" name="orderID">
+          <button type="submit" name="updateOrder" class="btn btn-success">Save Changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+      </form>
+  </div>
+
+</div>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+{% endblock %}
+

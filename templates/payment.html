@@ -1,0 +1,37 @@
+{% extends "website-layout.html" %}
+{% block title %} Order Payment | Parcel Forwarder {% endblock %}
+{% block content %}
+    {% if data["payment"] == "True" %}
+        <h2>Payment of amount {{ data.amount }} has been done successfully.</h2>
+    {% else %}
+        {% if data.quotes %}
+            {% for quote in data.quotes %}
+            <ul>
+                <li><b>Courier:</b> {{ quote['carrier'] }}</li>
+                <li><b>Service Name:</b> {{ quote['service_name'] }}</li>
+                <li><b>Shipping Price Net: </b>£ {{quote['shipping_price_net']}}</li>
+                <li><b>Protection Price Net: </b>£ {{quote['protection_price_net']}}</li>
+                <li><b>Total Gross: </b>£ {{quote['total_price_gross']}}</li>
+                <li><b>Info: </b>{{quote['service_description']}}</li>
+                <li><b>Handling Cost: </b>£ {{data.order.handling_cost}}</li>
+                <li><b>Consolidation Cost: </b>£ {{data.order.consolidation_cost}}</li>
+                <li><b>Storage Cost: </b>{{data.order.storage_cost}}</li>
+                <li><b>Payment</b>
+                    <form action="{{url_for('payment.charge')}}" method="post">
+                    <input type="hidden" name="orderID" value="{{data.order.orderID}}">
+                        <input type="hidden" name="offer" value="{{loop.index}}">
+                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                            data-key="{{ data.key }}"
+                            data-description="Pay for Order"
+                            data-label="Pay for Order"
+                            data-amount="{{ (quote['total_price_gross']|float + data.order.handling_cost|float + data.order.consolidation_cost|float + data.order.storage_cost|float) * 100 |round }}"
+                            data-locale="auto"></script>
+                    </form>
+                </li>
+            </ul>
+            {% endfor %}
+        {% else %}
+        <h1>No quotes found.</h1>
+        {% endif %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,344 @@
+{% extends "website-layout.html" %}
+{% block title %} Account | Parcel Forwarder {% endblock %}
+{% block content %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='assets/forms/smart-forms.css') }}" />
+{% endblock %}
+<!-- Start Page Title Container -->
+<div class="page-custom-header">
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12 text-center">
+            <h1 class="fancy-heading text-light">My Account</h1>
+            <ul class="breadcrumb light">
+               <li><a href="index.html">Home</a></li>
+               <li class="active">My Account</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>
+<!-- End Page Title Container -->
+<div class="content-container">
+   <div class="tab_section">
+      <div class="container">
+         <div class="row">
+            <div class="tab_grid">
+               <!-- Tab - Default -->
+               <div class="tab_head">
+                  <ul class="nav nav-tabs" role="tablist">
+                     <li class="active"><a href="#shipping-rate" role="tab" data-toggle="tab">My Orders</a></li>
+                     <li><a href="#new_order" role="tab" data-toggle="tab">New Order</a></li>
+                     <li><a href="#reviews" role="tab" data-toggle="tab">User Details</a></li>
+                     <li><a href="#transit-times" role="tab" data-toggle="tab">Edit User Details</a></li>
+                     <li><a href="#duty-tax-info" role="tab" data-toggle="tab">Change Password</a></li>
+                  </ul>
+               </div>
+               <div class="tab-content">
+                  <div class="tab-pane" id="new_order">
+                     <div class="smart-wrap col-sm-12 tab_colm">
+                        <div class="smart-forms smart-container wrap-1">
+                           <form method="post" action="{{url_for('website.account')}}" id="feedback">
+                              <div class="form-body">
+                                 <div class="frm-row">
+                                     <div class="section colm colm6">
+                                       <label class="field prepend-icon">
+                                          Country Of Origin
+                                       <select name="country_of_origin" class="gui-input" id="input1" required>
+                                            <option value="GB">UK</option>
+                                            <option value="US">USA</option>
+                                       </select>
+                                       <span class="field-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                       </label>
+                                    </div>
+                                     <div class="section colm colm6">
+                                         <input type="url" required name="purchase_link" class="gui-input" placeholder="Product Purchase Link">
+                                     </div>
+                                     <div class="section">
+                                        <textarea required name="package_description" class="gui-input" placeholder="Package Description" id="" cols="30" rows="10"></textarea>
+                                     </div>
+                                    <div class="form-footer">
+                                       <button type="submit" name="newOrder" value="newOrder" class="button btn-primary">Add New Order</button>
+                                    </div>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane active" id="shipping-rate">
+                     <div class="data">
+                        <div>
+                           <div>
+                              <a class="btn btn-dark mar-bot-10"><i class="fa fa-arrow-left mar-right-10"></i>New Order</a>
+                           </div>
+                           <div class="table-responsive">
+                              <table class="table table-bordered table-theme table-hover">
+                                 <tbody>
+                                    <tr>
+                                       <th>Order ID #</th>
+                                        <th>Purchase Link</th>
+                                        <th>Package Description</th>
+                                       <th>Status</th>
+                                       <th>Forward Address</th>
+                                       <th>Action</th>
+                                    </tr>
+                                    {% for order in data.orders %}
+                                    <tr>
+                                       <td class="order_orderID">{{order.orderID}}</td>
+                                        <td>{{order.purchase_link}}</td>
+                                        <td>{{order.package_description}}</td>
+                                       <td class="order_current_status">{{order.order_status}}</td>
+                                       <!--Order address from agent address should be here.-->
+                                       <td class="order_address">{{ order.address}}</td>
+                                    {% if current_user.user_type == "Customer" and order.order_status|lower == "new" %}
+                                       <td><a href="{{url_for('website.account')}}?delete_order={{order.orderID}}">Delete</a></td>
+                                    {% endif %}
+
+                                     {% if current_user.user_type|lower == "agent" %}
+                                       <td>
+                                          {% if current_user.userID != order.agentID %}
+                                          <!-- Accept Order Button. -->
+                                          <form method="POST" action="{{ url_for('website.account') }}">
+                                             <input type="hidden" value="{{order.orderID}}" name="order_id">
+                                             <input type="submit" name="accept_order" value="Accept Order">
+                                          </form>
+                                           {% else %}
+                                               <!--Edit order button.-->
+                                              <a class="edit-status" href="#" data-toggle="modal" data-target=".order_status_modal_{{order.orderID}}">Edit Order</a>
+                                          {% endif %}
+                                       </td>
+                                    {% endif %}
+
+                                    {% if order.order_status|lower == "at depot" and current_user.user_type|lower == "customer" and order.is_paid|lower == "false"%}
+                                       <td class="pay_btn">
+
+                                          <form action="{{ url_for('website.order_quotes', order_id=order.orderID) }}" method="POST">
+                                             <input type="hidden" name="order_id" value="{{ order.orderID }}">
+                                             <input type="submit" value="Order Quotes">
+                                          </form>
+                                       </td>
+                                    {% endif %}
+                                    </tr>
+                                 <style>.modal-dialog{margin: 1.75rem auto !important;}</style>
+                                       <div class="modal fade order_status_modal_{{order.orderID}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                         <div class="modal-dialog modal-md">
+                                           <div class="modal-content">
+                                                 <div class="modal-header">
+                                                   <h5 style="font-size: 22px; float: left;" class="modal-title" id="exampleModalLabel">Edit User Information</h5>
+                                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                     <span aria-hidden="true">&times;</span>
+                                                   </button>
+                                                 </div>
+                                                   <form action="{{ url_for('website.account') }}" method="POST">
+                                                     <div class="modal-body">
+                                                         <div class="row">
+                                                             <div class="col" style=" padding: 0 2rem; margin-bottom: 2rem;">
+                                                                <label for="order_status">Order Status: </label>
+                                                                <select class="form-control" name="order_status" id="order_status">
+                                                                   <option value="New">New</option>
+                                                                   <option value="At Depot">At Depot</option>
+                                                                   <option value="Paid">Paid</option>
+                                                                   <option value="Dispatched">Dispatched</option>
+                                                                </select>
+                                                             </div>
+                                                         <div class="row">
+                                                             <div class="col" style=" padding: 0 2rem; margin-bottom: 2rem;">
+                                                               <label for="size">
+                                                                  Package Weight
+                                                                  <input class="form-control" type="number" value="{{order.weight}}" name="weight" id="size">
+                                                               </label>
+                                                               <label for="received">
+                                                                  Received On
+                                                                  <input class="form-control" type="date" value="{{order.received}}" name="received" id="received">
+                                                               </label>
+                                                             </div>
+                                                         </div>
+                                                            <div class="row">
+                                                             <div class="col" style=" padding: 0 2rem; margin-bottom: 2rem;">
+                                                               <label for="size">
+                                                                  Handling Cost
+                                                                  <input class="form-control" type="number" value="{{order.handling_cost}}" name="handling_cost" id="handling_cost">
+                                                               </label>
+                                                               <label for="received">
+                                                                  Consolidation Cost
+                                                                  <input class="form-control" type="number" value="{{order.consolidation_cost}}" name="consolidation_cost" id="consolidation_cost">
+                                                               </label>
+                                                                <label for="received">
+                                                                  Storage Cost
+                                                                  <input class="form-control" type="number" value="{{order.storage_cost}}" name="storage_cost" id="storage_cost">
+                                                               </label>
+                                                                 <label for="length">
+                                                                  Order Package Length
+                                                                  <input class="form-control" type="number" value="{{order.length}}" name="length" id="length">
+                                                               </label>
+                                                                 <label for="width">
+                                                                  Order Package Width
+                                                                  <input class="form-control" type="number" value="{{order.width}}" name="width" id="width">
+                                                               </label>
+                                                                 <label for="height">
+                                                                  Order Package Height
+                                                                  <input class="form-control" type="number" value="{{order.height}}" name="height" id="height">
+                                                               </label>
+                                                             </div>
+                                                         </div>
+                                                     </div>
+                                                     <div class="modal-footer">
+                                                        <input type="hidden" name="order_id" value="{{ order.orderID }}">
+                                                       <button type="submit" name="changeStatus" value="changeStatus" class="btn btn-primary">Save changes</button>
+                                                     </div>
+                                                   </form>
+                                               </div>
+                                         </div>
+                                       </div>
+                                 {% endfor %}
+                                 </tbody>
+                              </table>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="reviews">
+                     <div class="col-sm-6 tab_colm">
+                        <p><b>Name</b>{{ current_user.firstname + " " + current_user.lastname}}</p>
+                        <p><b>Country </b>{{ current_user.country }}</p>
+                        <p><b>Mobile </b>{{ current_user.mobile }}</p>
+                        <p><b>Email </b>{{ current_user.email }}</p>
+                        <p><b>Address Line 1 </b>{{ current_user.address1 }}</p>
+                        <p><b>Address Line 2 </b>{{ current_user.address2 }}</p>
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="transit-times">
+                     <div class="smart-wrap col-sm-12 tab_colm">
+                        <div class="smart-forms smart-container wrap-1">
+                           <form method="post" action="{{ url_for('website.account') }}" id="feedback">
+                              <div class="form-body">
+                                 <div class="frm-row">
+                                    <div class="section colm colm4">
+                                       <label class="field prepend-icon">
+                                       <input type="text" name="firstname" id="firstname" class="gui-input" value="{{ current_user.firstname }}" placeholder="First name..." required>
+                                       <span class="field-icon"><i class="fa fa-user"></i></span>
+                                       </label>
+                                    </div>
+                                    <!-- end section -->
+                                    <div class="section colm colm4">
+                                       <label class="field prepend-icon">
+                                       <input type="text" name="lastname" id="lastname" class="gui-input" value="{{ current_user.lastname }}" placeholder="Last name..." required>
+                                       <span class="field-icon"><i class="fa fa-user"></i></span>
+                                       </label>
+                                    </div>
+                                    <!-- end section -->
+                                 </div>
+                                 <!-- end frm-row section -->
+                                 <div class="frm-row">
+                                    <div class="section colm colm6">
+                                       <label class="field prepend-icon">
+                                       <input type="text" name="address1" id="address1" class="gui-input" value="{{ current_user.address1 }}" placeholder="City / Country Name" required>
+                                       <span class="field-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                       </label>
+                                    </div>
+                                    <!-- end section -->
+                                    <div class="section colm colm6">
+                                       <label class="field prepend-icon">
+                                       <input type="tel" name="address2" id="address2" class="gui-input" value="{{ current_user.address2 }}" placeholder="Moble contact" required>
+                                       <span class="field-icon"><i class="fa fa-phone-square"></i></span>
+                                       </label>
+                                    </div>
+                                    <!-- end section -->
+                                 <!-- end frm-row section -->
+                              </div>
+                               <!-- end frm-row section -->
+                                 <div class="frm-row">
+                                    <div class="section colm colm6">
+                                       <label class="field prepend-icon">
+                                          <select name="country" class="gui-input">
+                                              {% for country in data.countries %}
+                                                {% if country['alpha-2'] == current_user.country %}
+                                                    <option value="{{country['alpha-2']}}" selected>{{country['name']}}</option>
+                                                 {% else %}
+                                                    <option value="{{country['alpha-2']}}">{{country['name']}}</option>
+                                                 {% endif %}
+                                             {% endfor %}
+                                          </select>
+                                       <span class="field-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                       </label>
+                                    </div>
+                                    <!-- end section -->
+                                    <div class="section colm colm6">
+                                       <label class="field prepend-icon">
+                                       <input type="tel" name="mobile" id="mobile" class="gui-input" value="{{ current_user.mobile }}" placeholder="Moble contact" required>
+                                       <span class="field-icon"><i class="fa fa-phone-square"></i></span>
+                                       </label>
+                                    </div>
+                                    <!-- end section -->
+                                 </div>
+                                 <!-- end frm-row section -->
+                              </div>
+                              <!-- end .form-body section -->
+                              <div class="form-footer">
+                                 <button type="submit" name="update_details" value="update_details" class="button btn-primary">Update Details</button>
+                              </div>
+                              <!-- end .form-footer section -->
+                           </form>
+                        </div>
+                        <!-- end .smart-forms section -->
+                     </div>
+                  </div>
+                  <div class="tab-pane" id="duty-tax-info">
+                     <div class="smart-wrap col-sm-12 tab_colm">
+                        <div class="smart-forms smart-container wrap-1">
+                           <form method="post" action="{{ url_for('website.account') }}" id="feedback">
+                              <div class="form-body">
+                                 <div class="frm-row">
+                                    <div class="section colm colm6">
+                                       <label class="field prepend-icon">
+                                       <input type="text" name="currentpassword" id="currentpassword" class="gui-input" placeholder="Current Password" required>
+                                       <span class="field-icon"><i class="fa fa-key" aria-hidden="true"></i>
+                                       </span>
+                                       </label>
+                                    </div>
+                                    <!-- end section -->
+                                    <div class="section colm colm6">
+                                       <label class="field prepend-icon">
+                                       <input type="tel" name="newpassword" id="newpassword" class="gui-input" placeholder="New Password" required>
+                                       <span class="field-icon"><i class="fa fa-key" aria-hidden="true"></i>
+                                       </span>
+                                       </label>
+                                    </div>
+                                    <!-- end section -->
+                                 </div>
+                                 <!-- end frm-row section -->
+                              </div>
+                              <!-- end .form-body section -->
+                              <div class="form-footer">
+                                 <button type="submit" name="update_password" value="update_password" class="button btn-primary">Update</button>
+                              </div>
+                              <!-- end .form-footer section -->
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+
+<script>
+    window.onload = function(){
+    $(document).on("click", ".edit-status", function (e) {
+        e.preventDefault();
+
+        var order_status_modal = $(this).attr('data-target');
+        var order_status = $(this).parents('tr').find('.order_current_status').text().trim();
+
+        $(order_status_modal).find('select').val(order_status)
+
+
+    });
+}
+</script>
+
+{% endblock %}

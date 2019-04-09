@@ -1,0 +1,164 @@
+{% extends "website-layout.html" %}
+{% block title %} Signup | Parcel Forwarder {% endblock %}
+{% block content %}
+
+{% block css %} <link rel="stylesheet" href="{{ url_for('static', filename='assets/forms/smart-forms.css') }}" /> {% endblock %}
+
+<!-- Start Page Title Container -->
+<div class="page-custom-header">
+<div class="container">
+<div class="row">
+<div class="col-md-12 text-center">
+<h1 class="fancy-heading text-light">Sign Up</h1>
+<ul class="breadcrumb light">
+<li><a href="index.html">Home</a></li>
+<li class="active">Sign Up</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- End Page Title Container -->
+<div class="content-container form_page">
+
+<div class="smart-wrap container">
+<div class="smart-forms smart-container wrap-1">
+
+
+<form method="post" action="{{ url_for('website.signup') }}" id="feedback">
+<div class="form-body">
+
+<div class="frm-row">
+
+<div class="section colm colm4">
+<label class="field prepend-icon">
+<input type="text" name="firstname" id="firstname" class="gui-input" placeholder="First name..." required>
+<span class="field-icon"><i class="fa fa-user"></i></span>  
+</label>
+</div><!-- end section -->
+
+<div class="section colm colm4">
+<label class="field prepend-icon">
+<input type="text" name="lastname" id="lastname" class="gui-input" placeholder="Last name..." required>
+<span class="field-icon"><i class="fa fa-user"></i></span>  
+</label>
+</div><!-- end section --> 
+
+
+<div class="section colm colm4">
+<label class="field prepend-icon">
+<input type="email" name="email" id="email" class="gui-input" placeholder="Your Email Address Here" required>
+<span class="field-icon"><i class="fa fa-envelope"></i></span>   
+</label>
+</div><!-- end section -->     
+
+</div><!-- end frm-row section -->
+
+<div class="frm-row">
+
+<div class="section colm colm6">
+<label class="field prepend-icon">
+<input type="password" name="password" id="password" class="gui-input" placeholder="Password" required>
+<span class="field-icon"><i class="fa fa-key" aria-hidden="true"></i>
+</span> 
+</label>
+</div><!-- end section -->                    
+
+<div class="section colm colm6">
+<label class="field prepend-icon">
+<input type="password" name="confirmpassword" id="confirmpassword" class="gui-input" placeholder="Confirm Password" required>
+<span class="field-icon"><i class="fa fa-key" aria-hidden="true"></i>
+</span>  
+</label>
+</div><!-- end section --> 
+
+</div><!-- end frm-row section -->
+
+
+<div class="frm-row">
+
+<div class="section colm colm6">
+<label class="field prepend-icon">
+<input type="text" name="address1" id="address1" class="gui-input" placeholder="Address Line 1" required>
+<span class="field-icon"><i class="fa fa-key" aria-hidden="true"></i>
+</span>
+</label>
+</div><!-- end section -->
+
+<div class="section colm colm6">
+<label class="field prepend-icon">
+<input type="text" name="address2" id="address2" class="gui-input" placeholder="Address Line 2" required>
+<span class="field-icon"><i class="fa fa-key" aria-hidden="true"></i>
+</span>
+</label>
+</div><!-- end section -->
+
+</div><!-- end frm-row section -->
+
+
+<div class="frm-row">
+
+<div class="section colm colm6">
+<label class="field prepend-icon">
+    <select name="country" class="gui-input" id="input1">
+     {% for country in data.countries %}
+        <option value="{{country['alpha-2']}}">{{country['name']}}</option>
+     {% endfor %}
+    </select>
+<span class="field-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span> 
+</label>
+</div><!-- end section -->                    
+
+<div class="section colm colm6">
+<label class="field prepend-icon">
+<input type="tel" name="mobile" id="mobile" class="gui-input" placeholder="Moble contact" required>
+<span class="field-icon"><i class="fa fa-phone-square"></i></span>  
+</label>
+</div><!-- end section --> 
+
+</div><!-- end frm-row section -->
+
+
+<div class="frm-row">
+
+<div class="section colm colm6">
+<label class="field prepend-icon">
+    <input class="gui-input" type="text" name="town" required  placeholder="Town">
+</label>
+</div><!-- end section -->
+
+<div class="section colm colm6">
+<label class="field prepend-icon">
+    <input class="gui-input" type="text" name="county" required placeholder="County">
+</label>
+</div><!-- end section -->
+
+</div><!-- end frm-row section -->
+
+
+<div class="frm-row">
+    <div class="section colm colm6">
+        <input class="gui-input" type="text" name="postcode" required  placeholder="Postal Code">
+    </div><!-- end section -->
+
+    <div class="section colm colm6">
+        <select name="user_type" id="usertype" class="gui-input">
+        <option value="Customer">Customer</option>
+        <option value="Agent">Agent</option>
+        </select>
+    </div>
+</div>
+
+
+</div><!-- end .form-body section -->
+<div class="form-footer">
+<button type="submit" class="button btn-primary">Sign Up</button>
+</div><!-- end .form-footer section -->
+</form>
+
+</div><!-- end .smart-forms section -->
+</div>
+
+
+</div>
+{% endblock %}
