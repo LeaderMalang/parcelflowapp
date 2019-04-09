@@ -154,12 +154,27 @@ def blogCatgories():
     categories=json.loads(categoryRes.content.decode())
     return categories
 
+#Post images
+def postImage(url):
+    imageRes=requests.get(url)
+    image=json.loads(imageRes.content.decode())
+    image=image.get('guid').get('rendered')
+    return image
 
 @website.route("/blog")
 def blog():
     posts=blogPosts()
     tags=blogTags()
     categories=blogCatgories()
+    for post in posts:
+        imageJson=post.get('_links').get('wp:featuredmedia')
+        attachmentUrl=imageJson[0].get('href')
+
+        postimg=postImage(attachmentUrl)
+
+        post.update({'postImage':postimg})
+
+    print(posts)
 
     return render_template("blogs.html",data={'posts':posts,'tags':tags,'categories':categories})
 
