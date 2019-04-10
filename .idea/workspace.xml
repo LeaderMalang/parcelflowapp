@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51293b9a-e77d-42ff-be18-25aafdd34b50" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/parcelflowapp-1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/parcelflowapp-1.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pipfile" beforeDir="false" afterPath="$PROJECT_DIR$/Pipfile" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,10 +40,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Pipfile">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
+            <state relative-caret-position="175">
               <caret line="17" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
@@ -79,7 +76,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auth.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="36">
@@ -217,7 +214,7 @@
       <updated>1554794009535</updated>
       <workItem from="1554794010691" duration="11705000" />
       <workItem from="1554892412794" duration="492000" />
-      <workItem from="1554892919768" duration="177000" />
+      <workItem from="1554892919768" duration="1068000" />
     </task>
     <task id="LOCAL-00001" summary="updated code">
       <created>1554810940498</created>
@@ -233,11 +230,18 @@
       <option name="project" value="LOCAL" />
       <updated>1554828308564</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="updated pipenv &#10;lock">
+      <created>1554893163980</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1554893163980</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12374000" />
+    <option name="totallyTimeSpent" value="13265000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -259,7 +263,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39789197" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39789197" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32938075" />
@@ -267,7 +271,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32674572" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.94729906" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32806325" />
       <window_info anchor="bottom" id="DB Execution Console" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -283,7 +287,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="updated code" />
     <MESSAGE value="added image getting code." />
-    <option name="LAST_COMMIT_MESSAGE" value="added image getting code." />
+    <MESSAGE value="updated pipenv &#10;lock" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated pipenv &#10;lock" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -387,13 +392,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Pipfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -412,6 +410,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Pipfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
         </state>
       </provider>
     </entry>
