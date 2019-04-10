@@ -12,6 +12,7 @@ flask-sqlalchemy = "*"
 flask-login = "*"
 stripe = "*"
 psycopg2 = "*"
+gunicorn = "19.9.0"
 
 [requires]
 python_version = "3.6"
