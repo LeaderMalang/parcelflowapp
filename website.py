@@ -174,7 +174,7 @@ def blog():
 
         post.update({'postImage':postimg})
 
-    print(posts)
+
 
     return render_template("blogs.html",data={'posts':posts,'tags':tags,'categories':categories})
 
