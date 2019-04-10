@@ -21,6 +21,13 @@ def home():
 def hiw():
     return render_template("how-it-works.html")
 
+@website.route("/our-services")
+def our_services():
+    return render_template("our-services.html")
+
+@website.route("/about-us")
+def about_us():
+    return render_template("about-us.html")
 
 @website.route("/faqs")
 def faqs():
