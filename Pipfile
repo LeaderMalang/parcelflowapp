@@ -11,8 +11,7 @@ requests = "*"
 flask-sqlalchemy = "*"
 flask-login = "*"
 stripe = "*"
-sqlite3 = "*"
 psycopg2 = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"
