@@ -485,20 +485,14 @@ $('#posts-pagination').postsPagination();
     </ul>
 <h4 class="post-title mar-top-50">Popular Posts</h4>
 <ul class="popular-posts">
+    {% for popularpost in data.popularPosts %}
 <li>
-<a href="#"><img class="img-responsive" src="./images/blogs/1.jpg" alt="Post Thumb"/></a>
-<h5><a href="#">Lorem ipsum dolor sit amet consectetur adipiscing elit</a></h5>
-<p>09 Oct 2018</p>
+<a href="#"><img class="img-responsive" src="{{popularpost.popPostImage}}" alt="Post Thumb"/></a>
+<h5><a href="#">{{popularpost.excerpt.rendered}}</a></h5>
+<p>{{popularpost.date}}</p>
 </li>
-<li>
-<a href="#"><img class="img-responsive" src="./images/blogs/2.jpg" alt="Post Thumb"/></a>
-<h5><a href="#">Nulla iaculis mattis lorem, quis gravida nunc iaculis</a></h5>
-<p>10 Oct 2018</p>
-</li><li>
-<a href="#"><img class="img-responsive" src="./images/blogs/3.jpg" alt="Post Thumb"/></a>
-<h5><a href="#">Vivamus tincidunt sem eu magna varius elementum maecenas felis</a></h5>
-<p>11 Oct 2018</p>
-</li>
+    {% endfor %}
+
 </ul>
 <h4 class="post-title mar-top-50">Tags</h4>
     {% for tag in data.tags %}

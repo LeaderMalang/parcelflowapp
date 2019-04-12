@@ -141,6 +141,13 @@ def blogComments(postId):
         return comments
     else:
         return False
+
+#popular blog post
+def popBlogPosts():
+    popPostUrl='http://falconit-solutions.com/wp-json/wordpress-popular-posts/v1/popular-posts/'
+    popPostRes=requests.get(popPostUrl)
+    popPosts=json.loads(popPostRes.content.decode())
+    return popPosts
 #fetch all Blog Posts
 def blogPosts():
     postUrl = 'http://falconit-solutions.com/wp-json/wp/v2/posts'
@@ -173,6 +180,13 @@ def blog():
     posts=blogPosts()
     tags=blogTags()
     categories=blogCatgories()
+    popularPosts=popBlogPosts()
+    for popularPost in popularPosts:
+        popImageJson=popularPost.get('_links').get('wp:featuredmedia')
+        popattachmentUrl = popImageJson[0].get('href')
+        popPostimg=postImage(popattachmentUrl)
+        popularPost.update({"popPostImage":popPostimg})
+
     for post in posts:
         imageJson=post.get('_links').get('wp:featuredmedia')
         attachmentUrl=imageJson[0].get('href')
@@ -183,7 +197,7 @@ def blog():
 
 
 
-    return render_template("blogs.html",data={'posts':posts,'tags':tags,'categories':categories})
+    return render_template("blogs.html",data={'posts':posts,'tags':tags,'categories':categories,"popularPosts":popularPosts})
 
 
 @website.route("/contact-us")
