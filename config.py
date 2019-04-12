@@ -1,4 +1,3 @@
-import os
 class Config(object):
     # Env config.
     DEBUG = True
@@ -7,10 +6,10 @@ class Config(object):
     SECRET_KEY = b'T!ZwEjo~G")SrT(nvh&'
 
     # Database realted config (postgresql)
-    DATABASE_NAME = "parcelflowapp"
-    DATABASE_USER = "web"
-    DATABASE_PASSWORD = "123"
-    DATABASE_HOST = "localhost"
+    DATABASE_NAME = "d250s00n2gfc6k"
+    DATABASE_USER = "vulsmuwxuugosh"
+    DATABASE_PASSWORD = "90f222b3f34a067c148c6d6cdf6cc89f4fea6af2441fbba486d490de48e2cc7b"
+    DATABASE_HOST = "ec2-50-19-127-115.compute-1.amazonaws.com:5432"
 
     # Payment API Config (Stripe)
     STRIPE_SECRET_KEY = "sk_test_L39RRwo4BfpVTApJNVJrLoQc"
@@ -22,8 +21,5 @@ class Config(object):
     PARCEFLOW_API_TOKEN =  "R8sfaQdG4y"
 
     # Sqlalchemy config
-    #for local
-    #SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME)
-    #for heroku
-    SQLALCHEMY_DATABASE_URI =os.environ['DATABASE_URL']
+    SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME)
     SQLALCHEMY_TRACK_MODIFICATIONS = False

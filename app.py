@@ -24,8 +24,8 @@ app.config.from_object('config.Config')
 
 # Setting up database and auth.
 
-with app.app_context():
-    database.init_app(app)
+app.app_context().push()
+database.init_app(app)
 login_manager.init_app(app)
 
 app.register_blueprint(admin)
