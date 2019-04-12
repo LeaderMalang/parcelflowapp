@@ -23,8 +23,9 @@ app = Flask(__name__)
 app.config.from_object('config.Config')
 
 # Setting up database and auth.
-app.app_context().push()
-database.init_app(app)
+
+with app.app_context():
+    database.init_app(app)
 login_manager.init_app(app)
 
 app.register_blueprint(admin)
