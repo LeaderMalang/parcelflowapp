@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51293b9a-e77d-42ff-be18-25aafdd34b50" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/about-us.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/our-services.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/website-layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/website-layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/website.py" beforeDir="false" afterPath="$PROJECT_DIR$/website.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +20,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/website.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+            <state relative-caret-position="330">
+              <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -33,13 +30,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app.py">
+        <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="30" column="30" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="30" />
+            <state relative-caret-position="15">
+              <caret line="48" column="93" selection-start-line="48" selection-start-column="91" selection-end-line="48" selection-end-column="93" />
               <folding>
-                <element signature="e#23#32#0" expanded="true" />
+                <element signature="n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="405">
+              <caret line="27" column="53" selection-start-line="27" selection-start-column="41" selection-end-line="27" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -47,7 +53,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/our-services.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
+            <state relative-caret-position="1365">
               <caret line="97" selection-end-line="102" selection-end-column="14" />
               <folding>
                 <element signature="n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" />
@@ -59,26 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/about-us.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
+            <state relative-caret-position="810">
               <caret line="54" selection-start-line="54" selection-end-line="54" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/website-layout.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="131" column="51" selection-start-line="131" selection-start-column="51" selection-end-line="131" selection-end-column="51" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/PycharmProjects/imgToText/venv/lib/python3.7/site-packages/flask/app.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="1220" selection-start-line="1220" selection-end-line="1220" />
             </state>
           </provider>
         </entry>
@@ -111,7 +99,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/templates/blogs.html" />
@@ -122,6 +109,8 @@
         <option value="$PROJECT_DIR$/website.py" />
         <option value="$PROJECT_DIR$/templates/about-us.html" />
         <option value="$PROJECT_DIR$/templates/website-layout.html" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/config.py" />
       </list>
     </option>
   </component>
@@ -259,7 +248,21 @@
       <option name="project" value="LOCAL" />
       <updated>1554924137201</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="updated faq ,about us and our services">
+      <created>1554927072600</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1554927072600</updated>
+    </task>
+    <task id="LOCAL-00006" summary="updated faq ,about us ,our services and home page">
+      <created>1554928205711</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1554928205711</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -275,10 +278,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1280" height="725" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1280" height="725" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.2533757" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2533757" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="aws.explorer" order="3" side_tool="true" />
@@ -312,7 +314,10 @@
     <MESSAGE value="added image getting code." />
     <MESSAGE value="updated pipenv &#10;lock" />
     <MESSAGE value="updated faq page" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated faq page" />
+    <MESSAGE value="updated faq ,about us and our services" />
+    <MESSAGE value="updated faq ,about us ,our services and home page" />
+    <MESSAGE value="updated db url" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated db url" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -438,20 +443,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="30" column="30" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="30" />
-          <folding>
-            <element signature="e#23#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/PycharmProjects/imgToText/venv/lib/python3.7/site-packages/flask/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="1220" selection-start-line="1220" selection-end-line="1220" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/website-layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="411">
+          <caret line="131" column="51" selection-start-line="131" selection-start-column="51" selection-end-line="131" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -462,9 +464,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="23" selection-end-line="30" selection-end-column="30" />
+          <folding>
+            <element signature="e#23#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/website.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="401">
           <caret line="31" column="23" lean-forward="true" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -472,10 +484,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/website-layout.html">
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="131" column="51" selection-start-line="131" selection-start-column="51" selection-end-line="131" selection-end-column="51" />
+        <state relative-caret-position="990">
+          <caret line="68" column="68" lean-forward="true" selection-start-line="68" selection-start-column="68" selection-end-line="68" selection-end-column="68" />
+          <folding>
+            <element signature="n#div#0;n#div#1;n#div#0;n#section#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>

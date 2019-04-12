@@ -1,3 +1,4 @@
+import os
 class Config(object):
     # Env config.
     DEBUG = True
@@ -21,5 +22,8 @@ class Config(object):
     PARCEFLOW_API_TOKEN =  "R8sfaQdG4y"
 
     # Sqlalchemy config
-    SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME)
+    #for local
+    #SQLALCHEMY_DATABASE_URI = "postgresql://{}:{}@{}/{}".format(DATABASE_USER, DATABASE_PASSWORD, DATABASE_HOST, DATABASE_NAME)
+    #for heroku
+    SQLALCHEMY_DATABASE_URI =os.environ['DATABASE_URL']
     SQLALCHEMY_TRACK_MODIFICATIONS = False
