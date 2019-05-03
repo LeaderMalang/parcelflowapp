@@ -131,11 +131,13 @@ def quick_quote():
 
     countries = get_countries()
     return render_template("quick-quote.html", data={"quotes": "", "countries": countries})
+#base Url Of Blog
+baseUrl='https://www.falconit-solutions.com/'
 
 #fetch comments against Post
 def blogComments(postId):
     if postId:
-        commentsUrl='https://www.falconit-solutions.com/wp-json/wp/v2/comments?post='+postId
+        commentsUrl=baseUrl+'wp-json/wp/v2/comments?post='+postId
         commentsRes = requests.get(commentsUrl)
         comments = json.loads(commentsRes.content.decode())
         return comments
@@ -157,19 +159,19 @@ def gteCommentsCount(link):
 
 #popular blog post
 def popBlogPosts():
-    popPostUrl='http://falconit-solutions.com/wp-json/wordpress-popular-posts/v1/popular-posts/'
+    popPostUrl=baseUrl+'wp-json/wordpress-popular-posts/v1/popular-posts/'
     popPostRes=requests.get(popPostUrl)
     popPosts=json.loads(popPostRes.content.decode())
     return popPosts
 #fetch all Blog Posts
 def blogPosts():
-    postUrl = 'http://falconit-solutions.com/wp-json/wp/v2/posts'
+    postUrl = baseUrl+'wp-json/wp/v2/posts'
     postsRes = requests.get(postUrl)
     posts = json.loads(postsRes.content.decode())
     return posts
 #fetch all Blog Tags
 def blogTags():
-    tagsUrl = 'http://falconit-solutions.com/wp-json/wp/v2/tags'
+    tagsUrl = baseUrl+'wp-json/wp/v2/tags'
     tagsRes = requests.get(tagsUrl)
     tags = json.loads(tagsRes.content.decode())
     return tags
@@ -177,14 +179,14 @@ def blogTags():
 #get Single Post
 def getSinglePost(id):
     if id:
-        singlePostUrl='http://falconit-solutions.com/wp-json/wp/v2/posts/'+id
+        singlePostUrl=baseUrl+'wp-json/wp/v2/posts/'+id
         singlePostRes=requests.get(singlePostUrl)
         singlepost=json.loads(singlePostRes.content.decode())
         return singlepost
 
 #fetch all categories
 def blogCatgories():
-    categoryUrl='http://falconit-solutions.com/wp-json/wp/v2/categories'
+    categoryUrl=baseUrl+'wp-json/wp/v2/categories'
     categoryRes=requests.get(categoryUrl)
     categories=json.loads(categoryRes.content.decode())
     return categories
