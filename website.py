@@ -141,6 +141,19 @@ def blogComments(postId):
         return comments
     else:
         return False
+#get Author Name
+def getAthor(link):
+    if link:
+        authorRes=requests.get(link)
+        author=json.loads(authorRes.content.decode())
+        return author.get('name')
+
+#get Comments Count
+def gteCommentsCount(link):
+    if link:
+        commentsCountRes=requests.get(link)
+        commentsCount=json.loads(commentsCountRes.content.decode())
+        return len(commentsCount)
 
 #popular blog post
 def popBlogPosts():
@@ -161,6 +174,14 @@ def blogTags():
     tags = json.loads(tagsRes.content.decode())
     return tags
 
+#get Single Post
+def getSinglePost(id):
+    if id:
+        singlePostUrl='http://falconit-solutions.com/wp-json/wp/v2/posts/'+id
+        singlePostRes=requests.get(singlePostUrl)
+        singlepost=json.loads(singlePostRes.content.decode())
+        return singlepost
+
 #fetch all categories
 def blogCatgories():
     categoryUrl='http://falconit-solutions.com/wp-json/wp/v2/categories'
@@ -175,6 +196,28 @@ def postImage(url):
     image=image.get('guid').get('rendered')
     return image
 
+@website.route('/singlePost',methods=['GET'])
+def singlePost():
+    id=request.args.get('id')
+    post=getSinglePost(id)
+
+    imageJson = post.get('_links').get('wp:featuredmedia')
+    attachmentUrl = imageJson[0].get('href')
+    postimg = postImage(attachmentUrl)
+
+    excerptPost = post.get('content').get('rendered')
+    excerptPost = excerptPost.replace('<p>', '')
+    excerptPost = excerptPost.replace('</p>', '')
+    postAuthorLink = post.get('_links').get('author')[0].get('href')
+    commentsLink = post.get('_links').get('replies')[0].get('href')
+    commentscount = gteCommentsCount(commentsLink)
+    authorName = getAthor(postAuthorLink)
+    post.update(
+        {'postImage': postimg, 'excerptPost': excerptPost, 'authorName': authorName, 'commentsCount': commentscount})
+
+    return render_template('single-post.html',data={'post':post})
+
+
 @website.route("/blog")
 def blog():
     posts=blogPosts()
@@ -185,15 +228,25 @@ def blog():
         popImageJson=popularPost.get('_links').get('wp:featuredmedia')
         popattachmentUrl = popImageJson[0].get('href')
         popPostimg=postImage(popattachmentUrl)
-        popularPost.update({"popPostImage":popPostimg})
+        popExcerpt=popularPost.get('excerpt').get('rendered')
+        popExcerpt=popExcerpt.replace('<p>','')
+        popExcerpt=popExcerpt.replace('</p>','')
+        popularPost.update({"popPostImage":popPostimg,'popExcerpt':popExcerpt})
 
     for post in posts:
         imageJson=post.get('_links').get('wp:featuredmedia')
         attachmentUrl=imageJson[0].get('href')
-
         postimg=postImage(attachmentUrl)
 
-        post.update({'postImage':postimg})
+
+        excerptPost=post.get('excerpt').get('rendered')
+        excerptPost=excerptPost.replace('<p>','')
+        excerptPost=excerptPost.replace('</p>','')
+        postAuthorLink=post.get('_links').get('author')[0].get('href')
+        commentsLink=post.get('_links').get('replies')[0].get('href')
+        commentscount=gteCommentsCount(commentsLink)
+        authorName=getAthor(postAuthorLink)
+        post.update({'postImage': postimg,'excerptPost':excerptPost,'authorName':authorName,'commentsCount':commentscount})
 
 
 
